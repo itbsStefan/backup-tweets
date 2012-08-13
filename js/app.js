@@ -2,21 +2,21 @@ $(function($) {
 
   'use strict';
 
-  var fetchButton = $('form button');
-  var screenName  = $('form input');
+  var formElements = $('input,button', $('form'));
+  var tweetFetchButton = $('form button');
+  var screenNameInput = $('form input.name');
+  var includeRTsBox = $('form input.includeRTs');
   var progressBar = $('.progress');
 
   function enableForm() {
 
-    fetchButton.removeAttr('disabled').addClass('disabled');
-    screenName.removeAttr('disabled').addClass('disabled');
+    formElements.removeAttr('disabled').removeClass('disabled');
     progressBar.addClass('hidden');
   }
 
   function disableForm() {
 
-    fetchButton.attr('disabled', '').removeClass('disabled');
-    screenName.attr('disabled', '').removeClass('disabled');
+    formElements.attr('disabled', '').addClass('disabled');
     progressBar.removeClass('hidden');
   }
 
@@ -30,21 +30,26 @@ $(function($) {
     enableForm();
   }
 
-  var twitterBaseUrl = 'https://api.twitter.com/1/statuses/user_timeline.json?trim_user=true&screen_name=';
-  function fetchTweets() {
+  var twitterBaseUrl = 'https://api.twitter.com/1/statuses/user_timeline.json?trim_user=true&count=50&screen_name=';
+  var screenName;
+  function fetchTweets(page) {
 
     disableForm();
+    page = page || 0;
+    screenName = screenNameInput.val();
 
-    var uid = screenName.val();
+    var includeRTs = !!includeRTsBox.attr('checked');
 
     $.ajax({
-      'url': twitterBaseUrl + uid,
+      'url': twitterBaseUrl + screenName + '&page=' + page + '&include_rts=' + includeRTs,
       'dataType': 'jsonp',
       'success': fetchSucceded,
       'error': fetchFailed
     });
   }
 
-  fetchButton.click(fetchTweets);
+  tweetFetchButton.click(fetchTweets);
+
+  screenNameInput.focus();
 
 });

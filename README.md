@@ -1,4 +1,2 @@
-backup-tweets
-=============
-
-repo for EU campus party demo code
+### Credits
+bootstrap theme - http://bootswatch.com/spacelab/

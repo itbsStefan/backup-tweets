@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Backup your Tweets</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
+    <script src="js/jquery.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <section class="container">
+
+      <h1>Backup your tweets</h1>
+
+      <form class="well form-inline" onsubmit="return false">
+        <input type="text" class="span3" placeholder="twitter screen name" />
+        <label class="checkbox">
+          <input type="checkbox" checked> include RTs
+        </label>
+        <button class="btn btn-primary">Fetch</button>
+      </form>
+
+      <div class="progress progress-striped active hidden" style="width: 50%; margin: 0 auto;">
+        <div class="bar" style="width: 100%;"></div>
+      </div>
+
+    </section>
+    <script src="js/app.js" type="text/javascript"></script>
+  </body>
+</html>
